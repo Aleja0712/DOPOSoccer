@@ -9,6 +9,7 @@ public class PlayerGame extends MovableEntity {
     private PowerBar powerBar;
     private boolean powerAura;
     private double speedBoostTimer;
+    private double kickTimer;
 
     private int speed;
     private int jump;
@@ -182,6 +183,11 @@ public class PlayerGame extends MovableEntity {
         if (this.speedBoostTimer > 0.0) {
             this.speedBoostTimer = Math.max(0.0, this.speedBoostTimer - dt);
         }
+
+        if (this.kickTimer > 0.0) {
+            this.kickTimer = Math.max(0.0, this.kickTimer - dt);
+        }
+
         if (this.effectTimer > 0.0) {
             this.effectTimer -= dt;
             if ("EMPUJE".equals(this.currentEffect)) {
@@ -267,6 +273,7 @@ public class PlayerGame extends MovableEntity {
         this.effectTimer = 0.0;
         this.currentEffect = "NONE";
         this.speedBoostTimer = 0.0;
+        this.kickTimer = 0.0;
     }
 
     public void heal(double amount) {
@@ -283,6 +290,15 @@ public class PlayerGame extends MovableEntity {
 
     public boolean hasSpeedBoost() {
         return this.speedBoostTimer > 0.0;
+    }
+
+    
+    public void startKick() {
+        this.kickTimer = 0.15;
+    }
+
+    public boolean isKicking() {
+        return this.kickTimer > 0.0;
     }
 
     public PowerBar getPowerBar() { 

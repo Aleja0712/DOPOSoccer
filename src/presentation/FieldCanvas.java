@@ -143,11 +143,16 @@ public class FieldCanvas extends JPanel {
 
         drawHead(g2, p, px, py, pw);
 
-        int bootX = (p.getSide() == 1) ? px + pw - 30 : px + 4;
+                int bootX = (p.getSide() == 1) ? px + pw - 30 : px + 4;
+        int bootY = py + ph - 18;
+        if (p.isKicking()) {
+            bootX += (p.getSide() == 1) ? 16 : -16;
+            bootY -= 8;
+        }
         g2.setColor(teamColor);
-        g2.fillRoundRect(bootX, py + ph - 18, 26, 18, 10, 10);
+        g2.fillRoundRect(bootX, bootY, 26, 18, 10, 10);
         g2.setColor(Color.WHITE);
-        g2.fillRect(bootX, py + ph - 5, 26, 5);
+        g2.fillRect(bootX, bootY + 13, 26, 5);
 
         g2.setFont(new Font("SansSerif", Font.BOLD, 12));
         if (p.isStunned()) {

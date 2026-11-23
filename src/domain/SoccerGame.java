@@ -197,6 +197,7 @@ public class SoccerGame implements Serializable {
             int dir = (side == 1) ? 1 : -1;
 
             if (attacker.canAct()) {
+                attacker.startKick();
                 double aCenterX = attacker.getX() + attacker.getWidth() / 2.0;
                 double aCenterY = attacker.getY() + attacker.getHeight() / 2.0;
                 double bCenterX = this.ball.getX() + this.ball.getWidth() / 2.0;
