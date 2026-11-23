@@ -1,0 +1,37 @@
+RETROSPECTIVA
+
+1. ¿Cuál fue el tiempo total invertido por cada uno de ustedes? (Horas)
+
+Mary Alejandra Guanga García –  3 días.
+Samuel Esteban Cruz – 3 días.
+
+2. ¿Cuál es el estado actual del proyecto? ¿Por qué?
+La versión uno está completa. Tiene la maqueta y la configuración del juego: pantalla de inicio, selección de modalidad, selección de personaje con su tiro de poder, mejora de estadísticas, tipo de partido (por tiempo o por goles) y resolución de la cancha. También tiene el juego en nivel básico, jugador contra jugador: movimiento, salto, patada, barra de poder, aura, los cuatro tiros de poder del Anexo 1, aturdimiento, muerte súbita y puntos para ganador y perdedor. El dominio tiene 18 pruebas de unidad en verde y los diagramas de secuencia de los casos principales. La modalidad jugador contra máquina aparece deshabilitada y Abrir/Salvar muestran un aviso, porque corresponden a la versión dos.
+
+3. Considerando las prácticas XP, ¿cuál fue la más útil? ¿Por qué?
+“Testing. When a bug is found tests are created”. Al escribir las pruebas descubrimos que, si se terminaba el partido antes de tiempo con el botón “Terminar Partido”, el jugador que iba ganando no recibía sus puntos. Primero escribimos la prueba shouldGivePointsToTheLeaderWhenTheMatchIsEndedEarly, la vimos fallar, corregimos MatchType.getWinner y la vimos pasar. Así quedó protegida contra cambios futuros.
+
+4. ¿Cuál consideran fue el mayor logro? ¿Por qué?
+Tener una presentación visualmente atractiva sin romper la separación entre capas. Las imágenes viven solo en la capa de presentación, y el dominio no sabe que existen. Cada pantalla (inicio, modo, personajes y cancha) es una clase propia que solo muestra el estado que le da la fachada SoccerGame. Gracias a eso, cambiar toda la parte gráfica no requirió modificar el dominio, salvo el tamaño del balón, que también afecta la física.
+
+5. ¿Cuál consideran que fue el mayor problema técnico? ¿Qué hicieron para resolverlo?
+Hubo dos:
+
+Que lo dibujado coincidiera con lo que calcula el dominio. Al agrandar el balón en pantalla, su zona de choque seguía midiendo 32 píxeles. Lo resolvimos cambiando el tamaño en el dominio con la constante Ball.SIZE, y quitando el número mágico 16 con el que se centraba el balón.
+Reutilizar el mismo código de imágenes en varias pantallas sin duplicarlo. Lo resolvimos creando ImageLoader y GameStyle, y haciendo que ModePanel y SetupPanel hereden el fondo de BackgroundPanel.
+
+6. ¿Qué hicieron bien como equipo? ¿Qué se comprometen a hacer para mejorar los resultados?
+Revisamos el código existente antes de cambiarlo, corregimos malas prácticas (código muerto, números mágicos, comentarios innecesarios) y probamos cada cambio antes de seguir. Nos comprometemos a:
+
+empezar cada versión con más anticipación;
+escribir las pruebas antes del código del dominio;
+mantener el diagrama de clases actualizado a medida que cambia el código;
+convertir los efectos de los poderes (hoy son textos) en clases, para cumplir mejor el requisito de extensión.
+
+7. ¿Qué referencias usaron? ¿Cuál fue la más útil?
+
+Escuela Colombiana de Ingeniería. (2026). DOPOSoccer 2026-2: Proyecto final [Enunciado]. Desarrollo Orientado por Objetos.
+Oracle. (s. f.). Java Platform, Standard Edition API Specification: javax.swing. https://docs.oracle.com/en/java/javase/
+JUnit. (s. f.). JUnit 4 documentation. https://junit.org/junit4/
+Head Soccer Wiki. (s. f.). Fight Mode. Fandom.
+Anthropic. (2026). Claude [Modelo de lenguaje]. Usado como tutor para revisar el código, explicar conceptos y generar las imágenes de personajes, arco y balón. https://claude.ai
