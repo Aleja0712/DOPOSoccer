@@ -1,0 +1,45 @@
+RETROSPECTIVA
+
+1. ¿Cuál fue el tiempo total invertido por cada uno de ustedes? (Horas)
+
+Mary Alejandra Guanga García – 8 horas diarias durante 3 a 4 días (entre 24 y 32 horas).
+Samuel Esteban Cruz – 8 horas diarias durante 3 a 4 días (entre 24 y 32 horas).
+
+2. ¿Cuál es el estado actual del proyecto? ¿Por qué?
+
+RTA: La versión final está completa, además de lo que ya tenía la versión uno, ahora tiene la modalidad jugador contra máquina con cuatro perfiles (Torpe, Ofensiva, Defensiva y Experta), los seis tiros de poder con sus efectos, los elementos que aparecen en la cancha (salud, energía y velocidad) y una animación sencilla de patada. 
+
+Abrir y Salvar ya funcionan: la partida completa se guarda en un archivo .dat y se puede abrir después en el mismo punto en que iba, por otra parte, el dominio tiene 25 pruebas de unidad en verde, el diagrama de clases quedó igual al código y hay once diagramas de secuencia, cada uno dentro del método que explica.
+
+3. Considerando las prácticas XP, ¿cuál fue la más útil? ¿Por qué?
+
+RTA:"Testing. When a bug is found tests are created", porque al correr la prueba shouldSaveAndOpenMatchPreservingCompleteState vimos que guardar la partida fallaba con un error de entrada/salida, y revisando, encontramos que Field, Goal, Marker, PowerBar y MatchType no implementaban Serializable, entonces Java no podía escribir la partida en el .dat.
+
+4. ¿Cuál consideran fue el mayor logro? ¿Por qué?
+RTA: Nuestro mayor logro fue agregar la máquina y los nuevos poderes sin modificar la fachada SoccerGame, donde cada perfil de máquina es una subclase de CPUController (patrón Estrategia), y la Experta reutiliza a la Ofensiva y a la Defensiva según el marcador, el tiempo y la vida. Además predice hacia dónde va el balón, igual que la mejora en las físicas.
+
+5. ¿Cuál consideran que fue el mayor problema técnico? ¿Qué hicieron para resolverlo?
+
+RTA: El problema que tuvimos fue:
+
+Guardar y abrir la partida completa, porque al serializar SoccerGame, Java necesita que todas las clases que están dentro también sean Serializable, y algunas no lo eran y lo resolvimos agregándoles implements Serializable.
+
+
+6. ¿Qué hicieron bien como equipo? ¿Qué se comprometen a hacer para mejorar los resultados?
+RTA: Nos repartimos el trabajo, probamos cada cambio antes de seguir y, al refactorizar y documentar, cuidamos de no cambiar el funcionamiento ni la interfaz. También usamos Git para tener el proyecto actualizado entre los dos. Por otra parte, nos comprometemos a:
+
+- Empezar cada proyecto con más anticipación, para no concentrar tantas horas en pocos días
+- Mantener los diagramas actualizados a medida que cambia el código.
+
+
+7. ¿Qué referencias usaron? ¿Cuál fue la más útil?
+
+Escuela Colombiana de Ingeniería. (2026). DOPOSoccer 2026-2: Proyecto final [Enunciado]. Desarrollo Orientado por Objetos.
+Escuela Colombiana de Ingeniería. (2026). Diapositivas del curso Desarrollo Orientado por Objetos (Swing, GRASP y patrones de diseño).
+Oracle. (s. f.). Java Platform, Standard Edition API Specification: javax.swing y java.io. https://docs.oracle.com/en/java/javase/
+JUnit. (s. f.). JUnit 4 documentation. https://junit.org/junit4/
+Change Vision. (s. f.). Astah UML. https://astah.net/
+Head Soccer Wiki. (s. f.). Fight Mode. Fandom.
+Anthropic. (2026). Claude [Modelo de lenguaje]. Usado como tutor para revisar el código, explicar conceptos, apoyar la corrección de los diagramas UML y generar las imágenes de personajes, arco y balón. https://claude.ai
+
+La más útil fue el enunciado del proyecto, porque de ahí salieron todas las reglas que implementamos y probamos.
